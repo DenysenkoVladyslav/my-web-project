@@ -1,0 +1,39 @@
+:root {
+  --primary-color: #181818;
+  --text-color: #222222;
+  --bg-color: #dbdbdb;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: sans-serif;
+}
+
+h1 {
+  color: var(--primary-color);
+}
+
+nav a {
+  display: block;
+  margin-bottom: 5px;
+}
+
+h2 {
+  margin-bottom: -10px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+footer h2 {
+  margin-bottom: 20px;
+}
+footer p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+footer p:first-of-type {
+  margin-bottom: 5px;
+}
