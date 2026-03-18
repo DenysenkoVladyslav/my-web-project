@@ -24,10 +24,16 @@ body {
 h1, h2, h3 {
   font-family: 'Poppins', sans-serif;
   line-height: 1.2;
+  margin-top: 0;
 }
+
 h1 {
   font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 1rem;
+}
+
+nav {
+  padding: 0 1rem;
 }
 
 nav ul {
@@ -42,6 +48,10 @@ nav ul {
 nav a {
   text-decoration: none;
   color: var(--primary-color);
+}
+
+nav a:hover {
+  text-decoration: underline;
 }
 
 a:focus,
@@ -59,6 +69,7 @@ main {
 section {
   margin-bottom: 2rem;
 }
+
 p {
   margin-bottom: 1rem;
 }
