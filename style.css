@@ -4,6 +4,7 @@
 
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -13,12 +14,13 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
+  text-rendering: optimizeSpeed;
 }
 
 h1, h2, h3 {
@@ -30,6 +32,10 @@ h1, h2, h3 {
 h1 {
   font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 1rem;
+}
+
+nav, header, footer {
+  width: 100%;
 }
 
 nav {
@@ -76,6 +82,11 @@ p {
 
 footer {
   padding: 1rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 @media (min-width: 768px) {
