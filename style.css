@@ -205,3 +205,30 @@ body.dark-theme #contact-form button:hover {
   outline: 2px solid #007bff;
   outline-offset: -1px;
 }
+
+#search-input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.project-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+body.dark-theme .project-card {
+  border-color: #444;
+  background-color: rgba(255, 255, 255, 0.05);
+}

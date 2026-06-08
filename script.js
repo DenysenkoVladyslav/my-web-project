@@ -1,20 +1,44 @@
 console.log("JS connected!");
 
-const myProjects = [
+const projects = [
   { id: 1, title: "Сайт-візитка", tech: "HTML/CSS" },
-  { id: 2, title: "Магазин", tech: "JavaScript" }
+  { id: 2, title: "Todo App", tech: "JavaScript" },
+  { id: 3, title: "Портфоліо", tech: "HTML/CSS/JS" }
 ];
 
-console.log(myProjects[0]);
-console.log(myProjects[0].title);
+function createProjectCard(project) {
+  return `
+    <div class="project-card">
+      <h3>${project.title}</h3>
+      <p>Технології: ${project.tech}</p>
+    </div>
+  `;
+}
 
-const list = document.querySelector('#projects-list');
+const container = document.querySelector('#projects-container');
+const searchInput = document.querySelector('#search-input');
 
-if (list) {
-  myProjects.forEach(project => {
-    const li = document.createElement('li');
-    li.textContent = project.title + " (" + project.tech + ")";
-    list.appendChild(li);
+function renderProjects(list) {
+  if (!container) return;
+
+  const html = list
+    .map(project => createProjectCard(project))
+    .join('');
+
+  container.innerHTML = html;
+}
+
+renderProjects(projects);
+
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    const value = searchInput.value.toLowerCase();
+
+    const filtered = projects.filter(project =>
+      project.title.toLowerCase().includes(value)
+    );
+
+    renderProjects(filtered);
   });
 }
 
@@ -59,7 +83,7 @@ if (form && nameInput) {
     } else {
       alert("Форму відправлено!");
       nameInput.value = '';
-      modal.classList.remove('is-open');
+      if (modal) modal.classList.remove('is-open');
     }
   });
 }
