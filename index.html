@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфоліо</title>
     <meta name="description" content="Денисенко Владислав">
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <h1>Денисенко Владислав</h1>
+        <button id="theme-toggle">Змінити тему</button>
     </header>
 
     <nav aria-label="Головна навігація">
         <ul>
             <li><a href="#about">Про мене</a></li>
             <li><a href="#skills">Навички</a></li>
+            <li><a href="#projects">Проєкти</a></li>
             <li><a href="#contacts">Контакти</a></li>
         </ul>
     </nav>
@@ -36,13 +37,30 @@
                 <p>HTML, CSS</p>
             </article>
         </section>
+
+        <section id="projects">
+            <h2>Мої проєкти</h2>
+            <ul id="projects-list"></ul>
+        </section>
     </main>
 
     <footer id="contacts">
         <h2>Контакти</h2>
         <p>Email: <a href="mailto:denysenko.vladyslav1123@vu.cdu.edu.ua">denysenko.vladyslav1123@vu.cdu.edu.ua</a></p>
         <p>Денисенко Владислав</p>
+        <button id="open-modal">Контакти</button>
     </footer>
 
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button id="close-modal">Закрити</button>
+            <form id="contact-form">
+                <input type="text" id="user-name" placeholder="Ваше ім'я">
+                <button type="submit">Надіслати</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
