@@ -232,3 +232,14 @@ body.dark-theme .project-card {
   border-color: #444;
   background-color: rgba(255, 255, 255, 0.05);
 }
+
+.post {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+body.dark-theme .post {
+  border-color: #444;
+}

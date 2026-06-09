@@ -87,3 +87,43 @@ if (form && nameInput) {
     }
   });
 }
+
+async function loadPosts() {
+  const loading = document.querySelector('#loading');
+  const postsContainer = document.querySelector('#posts-container');
+
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+    if (!response.ok) {
+      throw new Error('Server error');
+    }
+
+    const data = await response.json();
+
+    const html = data.slice(0, 5)
+      .map(post => `
+        <div class="post">
+          <h3>${post.title}</h3>
+          <p>${post.body}</p>
+        </div>
+      `)
+      .join('');
+
+    if (postsContainer) {
+      postsContainer.innerHTML = html;
+    }
+
+    if (loading) {
+      loading.style.display = 'none';
+    }
+
+  } catch (error) {
+    console.error(error);
+    if (loading) {
+      loading.textContent = 'Помилка завантаження даних';
+    }
+  }
+}
+
+loadPosts();
