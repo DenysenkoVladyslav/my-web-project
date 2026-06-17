@@ -6,6 +6,12 @@ const projects = [
   { id: 3, title: "Портфоліо", tech: "HTML/CSS/JS" }
 ];
 
+let allPosts = [];
+
+const projectsContainer = document.querySelector('#projects-container');
+const searchInput = document.querySelector('#search-input');
+const postsContainer = document.querySelector('#posts-container');
+
 function createProjectCard(project) {
   return `
     <div class="project-card">
@@ -15,30 +21,74 @@ function createProjectCard(project) {
   `;
 }
 
-const container = document.querySelector('#projects-container');
-const searchInput = document.querySelector('#search-input');
-
 function renderProjects(list) {
-  if (!container) return;
+  if (!projectsContainer) return;
 
   const html = list
     .map(project => createProjectCard(project))
     .join('');
 
-  container.innerHTML = html;
+  projectsContainer.innerHTML = html;
+}
+
+function renderPosts(list) {
+  if (!postsContainer) return;
+
+  const html = list
+    .map(post => `
+      <div class="post">
+        <h3>${post.title}</h3>
+        <p>${post.body}</p>
+      </div>
+    `)
+    .join('');
+
+  postsContainer.innerHTML = html;
+}
+
+async function loadPosts() {
+  const loading = document.querySelector('#loading');
+
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+    if (!response.ok) {
+      throw new Error('Помилка сервера');
+    }
+
+    const data = await response.json();
+    allPosts = data.slice(0, 10);
+
+    renderPosts(allPosts);
+
+    if (loading) {
+      loading.style.display = 'none';
+    }
+
+  } catch (error) {
+    console.error(error);
+    if (loading) {
+      loading.textContent = 'Помилка завантаження';
+    }
+  }
 }
 
 renderProjects(projects);
+loadPosts();
 
 if (searchInput) {
   searchInput.addEventListener('input', () => {
     const value = searchInput.value.toLowerCase();
 
-    const filtered = projects.filter(project =>
+    const filteredProjects = projects.filter(project =>
       project.title.toLowerCase().includes(value)
     );
+    renderProjects(filteredProjects);
 
-    renderProjects(filtered);
+    const filteredPosts = allPosts.filter(post =>
+      post.title.toLowerCase().includes(value)
+    );
+    renderPosts(filteredPosts);
   });
 }
 
@@ -87,43 +137,3 @@ if (form && nameInput) {
     }
   });
 }
-
-async function loadPosts() {
-  const loading = document.querySelector('#loading');
-  const postsContainer = document.querySelector('#posts-container');
-
-  try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-
-    if (!response.ok) {
-      throw new Error('Server error');
-    }
-
-    const data = await response.json();
-
-    const html = data.slice(0, 5)
-      .map(post => `
-        <div class="post">
-          <h3>${post.title}</h3>
-          <p>${post.body}</p>
-        </div>
-      `)
-      .join('');
-
-    if (postsContainer) {
-      postsContainer.innerHTML = html;
-    }
-
-    if (loading) {
-      loading.style.display = 'none';
-    }
-
-  } catch (error) {
-    console.error(error);
-    if (loading) {
-      loading.textContent = 'Помилка завантаження даних';
-    }
-  }
-}
-
-loadPosts();

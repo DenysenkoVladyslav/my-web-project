@@ -219,6 +219,7 @@ body.dark-theme #contact-form button:hover {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 2rem;
 }
 
 .project-card {
