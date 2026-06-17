@@ -137,3 +137,59 @@ if (form && nameInput) {
     }
   });
 }
+
+let tasks = [];
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const data = localStorage.getItem('tasks');
+    if (data) {
+        tasks = JSON.parse(data);
+    }
+}
+
+const input = document.querySelector('#task-input');
+const addBtn = document.querySelector('#add-task');
+const list = document.querySelector('#task-list');
+
+if (addBtn && input && list) {
+    addBtn.addEventListener('click', () => {
+        const value = input.value.trim();
+
+        if (value === '') return;
+
+        tasks.push({ text: value });
+        saveTasks();
+        renderTasks();
+
+        input.value = '';
+    });
+}
+
+function renderTasks() {
+    if (!list) return;
+    list.innerHTML = '';
+
+    tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.textContent = task.text;
+
+        const btn = document.createElement('button');
+        btn.textContent = 'X';
+
+        btn.addEventListener('click', () => {
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        });
+
+        li.appendChild(btn);
+        list.appendChild(li);
+    });
+}
+
+loadTasks();
+renderTasks();
